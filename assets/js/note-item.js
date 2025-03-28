@@ -59,6 +59,11 @@ class NoteItemElement extends HTMLElement {
             localStorage.setItem('notes', JSON.stringify(newNotes));
             document.querySelector('note-list').setAttribute('timestamp', Date.now());
         });
+
+        this.shadowRoot.querySelector('.edit-button').addEventListener('click', e => {
+            e.preventDefault();
+            document.querySelector('note-form').edit(this._note);
+        });
     }
 }
 

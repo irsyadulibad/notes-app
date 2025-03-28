@@ -2,6 +2,7 @@ class NoteFormElement extends HTMLElement {
     constructor() {
         super();
 
+        this._note = null;
         this._overlay = document.createElement('div');
         this._overlay.classList.add('form-overlay');
 
@@ -14,6 +15,19 @@ class NoteFormElement extends HTMLElement {
     }
 
     _save(note) {
+        if(this._note) {
+            const notes = JSON.parse(localStorage.getItem('notes'));
+
+            notes.map((item, index) => {
+                if(item.id == this._note.id) {
+                    notes[index] = note;
+                }
+            });
+
+            localStorage.setItem('notes', JSON.stringify(notes));
+            return;
+        }
+
         const notes = JSON.parse(localStorage.getItem('notes'));
         notes.push(note);
         localStorage.setItem('notes', JSON.stringify(notes));
@@ -25,6 +39,12 @@ class NoteFormElement extends HTMLElement {
         this._overlay.classList.add('show');
         this._overlay.querySelector('.form-drawer').classList.add('show');
         this.querySelector('input').focus();
+
+        if(this._note) {
+            this.querySelector('.form-title').textContent = 'Edit Catatan';
+            this.querySelector('input').value = this._note.title;
+            this.querySelector('textarea').value = this._note.body;
+        }
     }
 
     hide() {
@@ -39,9 +59,18 @@ class NoteFormElement extends HTMLElement {
 
             drawer.classList.remove('show');
             drawer.style.animation = '';
+
+            this._note = null;
+            this.querySelector('form').reset();
+            this.querySelector('.form-title').textContent = 'Tambah Catatan';
         }, 300);
 
         document.body.style.overflow = 'unset';
+    }
+
+    edit(note) {
+        this._note = note;
+        this.show();
     }
 
     render() {

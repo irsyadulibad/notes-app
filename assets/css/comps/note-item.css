@@ -13,6 +13,7 @@
     border-radius: 10px;
     padding: 10px;
     font-family: 'Inter', sans-serif;
+    position: relative;
 }
 
 .note-title {
@@ -43,5 +44,26 @@
         &:hover {
             background-color: #f3f4f6;
         }
+    }
+}
+
+.edit-button {
+    background: none;
+    border: none;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    display: none;
+    color: #6a7282;
+    cursor: pointer;
+
+    i {
+        font-size: 18px;
+    }
+}
+
+:host(:hover) {
+    .edit-button {
+        display: block;
     }
 }
