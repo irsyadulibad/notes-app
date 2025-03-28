@@ -17,6 +17,7 @@ class NoteFormElement extends HTMLElement {
     _save(note) {
         if(this._note) {
             const notes = JSON.parse(localStorage.getItem('notes'));
+            note.archived = this._note.archived;
 
             notes.map((item, index) => {
                 if(item.id == this._note.id) {
