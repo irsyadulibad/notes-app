@@ -35,6 +35,7 @@ class NoteItemElement extends HTMLElement {
     attachListeners() {
         const noteId = this.getAttribute('data-noteid');
         const notes = JSON.parse(localStorage.getItem('notes'));
+        const toast = document.querySelector('toast-message');
 
         this.shadowRoot.querySelector('.archive-button').addEventListener('click', e => {
             e.preventDefault();
@@ -49,6 +50,7 @@ class NoteItemElement extends HTMLElement {
 
             localStorage.setItem('notes', JSON.stringify(newNotes));
             document.querySelector('note-list').setAttribute('timestamp', Date.now());
+            toast.show(this._note.archived ? 'Catatan berhasil dibuka' : 'Catatan berhasil diarsipkan');
         });
 
         this.shadowRoot.querySelector('.delete-button').addEventListener('click', e => {
@@ -58,6 +60,7 @@ class NoteItemElement extends HTMLElement {
 
             localStorage.setItem('notes', JSON.stringify(newNotes));
             document.querySelector('note-list').setAttribute('timestamp', Date.now());
+            toast.show('Catatan berhasil dihapus');
         });
 
         this.shadowRoot.querySelector('.edit-button').addEventListener('click', e => {
