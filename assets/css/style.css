@@ -120,7 +120,8 @@ main {
     #add-section {
         position: fixed;
         bottom: 10px;
-        width: 100%;
+        left: 50%;
+        transform: translateX(-50%);
         display: flex;
         justify-content: center;
 
@@ -227,7 +228,7 @@ main {
                     width: 100%;
                     border-radius: var(--radius);
                     box-sizing: border-box;
-                    padding: 10px 20px;
+                    padding: 10px 20px 0;
                 }
 
                 input {
@@ -238,6 +239,13 @@ main {
                 textarea {
                     font-size: 14px;
                     font-family: 'Inter', sans-serif;
+                }
+
+                .error-message {
+                    color: red;
+                    font-size: 10px;
+                    font-weight: 400;
+                    padding: 0 20px;
                 }
             }
 
@@ -254,6 +262,23 @@ main {
                 margin: auto;
             }
         }
+    }
+}
+
+.toast {
+    position: fixed;
+    top: 20px;
+    right: 10px;
+    background-color: #101828;
+    color: white;
+    padding: 10px 15px;
+    border-radius: var(--radius);
+    font-size: 14px;
+    font-weight: 500;
+    display: none;
+
+    &.show {
+        display: block;
     }
 }
 

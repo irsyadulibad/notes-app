@@ -15,6 +15,8 @@ class NoteFormElement extends HTMLElement {
     }
 
     _save(note) {
+        const toast = document.querySelector('toast-message');
+
         if(this._note) {
             const notes = JSON.parse(localStorage.getItem('notes'));
             note.archived = this._note.archived;
@@ -26,12 +28,38 @@ class NoteFormElement extends HTMLElement {
             });
 
             localStorage.setItem('notes', JSON.stringify(notes));
+            toast.show('Catatan berhasil diubah');
             return;
         }
 
         const notes = JSON.parse(localStorage.getItem('notes'));
         notes.push(note);
         localStorage.setItem('notes', JSON.stringify(notes));
+        toast.show('Catatan berhasil disimpan');
+    }
+
+    _customValidation(event) {
+        event.target.setCustomValidity('');
+
+        if(event.target.validity.valueMissing) {
+            event.target.setCustomValidity('Tidak boleh kosong');
+            return;
+        }
+
+        if(event.target.validity.tooShort) {
+            event.target.setCustomValidity('Minimal panjang 4 karakter');
+            return;
+        }
+
+        if(event.target.validity.patternMismatch) {
+            event.target.setCustomValidity('Tidak valid');
+            return;
+        }
+
+        if(event.target.validity.typeMismatch) {
+            event.target.setCustomValidity('Tidak valid');
+            return;
+        }
     }
 
     show() {
@@ -50,9 +78,14 @@ class NoteFormElement extends HTMLElement {
 
     hide() {
         const drawer = this._overlay.querySelector('.form-drawer');
+        const form = this.querySelector('form');
 
         this._overlay.style.opacity = 0;
         drawer.style.animation = 'slide-down .3s ease forwards';
+
+        form.querySelectorAll('.error-message').forEach(error => {
+            error.textContent = '';
+        });
 
         setTimeout(() => {
             this._overlay.style.opacity = 1;
@@ -62,7 +95,7 @@ class NoteFormElement extends HTMLElement {
             drawer.style.animation = '';
 
             this._note = null;
-            this.querySelector('form').reset();
+            form.reset();
             this.querySelector('.form-title').textContent = 'Tambah Catatan';
         }, 300);
 
@@ -89,6 +122,26 @@ class NoteFormElement extends HTMLElement {
             if(e.target.closest('.form-drawer')) return;
             this.hide();
         });
+
+        form.querySelectorAll('input, textarea').forEach(input => {
+            input.addEventListener('change', this._customValidation);
+            input.addEventListener('input', this._customValidation);
+            input.addEventListener('focus', this._customValidation);
+
+            input.addEventListener('blur', e => {
+                const isValid = e.target.validity.valid;
+                const errorMessage = e.target.validationMessage;
+                const errorElement = document.getElementById(
+                    e.target.getAttribute('aria-describedby')
+                );
+
+                if(isValid) {
+                    errorElement.textContent = '';
+                } else {
+                    errorElement.textContent = errorMessage;
+                }
+            });
+        })
 
         form.addEventListener('submit', e => {
             e.preventDefault();

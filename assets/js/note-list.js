@@ -16,7 +16,8 @@ class NoteListElement extends HTMLElement {
         const notes = JSON.parse(localStorage.getItem('notes'));
 
         return notes.filter(note => note.archived == this._showArchived)
-            .filter(note => note.title.toLowerCase().includes(keyword.toLowerCase()));
+            .filter(note => note.title.toLowerCase().includes(keyword.toLowerCase()))
+            .reverse();
     }
 
     showNotes(active) {

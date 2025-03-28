@@ -35,6 +35,7 @@
     </main>
 
     <note-form></note-form>
+    <toast-message></toast-message>
 
     <template id="note-item">
         <link rel="stylesheet" href="assets/css/comps/note-item.css">
@@ -75,10 +76,12 @@
 
                 <div class="form-wrapper">
                     <div class="form-group">
-                        <input type="text" name="title" placeholder="Judul">
+                        <input type="text" name="title" placeholder="Judul" aria-describedby="title-error" minlength="4" required>
+                        <small id="title-error" class="error-message"></small>
                     </div>
                     <div class="form-group">
-                        <textarea name="body" placeholder="Catatan..." rows="8"></textarea>
+                        <textarea name="body" placeholder="Catatan..." rows="8" aria-describedby="body-error" minlength="4" required></textarea>
+                        <small id="body-error" class="error-message"></small>
                     </div>
                 </div>
 
@@ -94,6 +97,7 @@
     <script src="assets/js/note-item.js"></script>
     <script src="assets/js/note-list.js"></script>
     <script src="assets/js/note-form.js"></script>
+    <script src="assets/js/toast.js"></script>
     <script src="assets/js/app.js"></script>
 </body>
 </html>
