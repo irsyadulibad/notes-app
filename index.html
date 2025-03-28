@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notes App</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.31.0/dist/tabler-icons.min.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Notes App</h1>
+        <search-bar></search-bar>
+        <div></div>
+    </header>
+
+    <main>
+        <section>
+            <nav-menu></nav-menu>
+            <note-list></note-list>
+        </section>
+
+        <section id="add-section">
+            <button id="add-button">
+                <i class="ti ti-circle-plus"></i>
+                Tambah Catatan
+            </button>
+        </section>
+    </main>
+
+    <note-form></note-form>
+
+    <template id="note-item">
+        <link rel="stylesheet" href="assets/css/comps/note-item.css">
+
+        <h3 class="note-title">Title Content</h3>
+        <p class="note-body">body content</p>
+        <div class="note-actions">
+            <button class="archive-button" title="Arsipkan">
+                <i class="ti ti-archive"></i>
+            </button>
+            <button class="delete-button" title="Hapus">
+                <i class="ti ti-trash"></i>
+            </button>
+        </div>
+    </template>
+
+    <template id="empty-notes">
+        <div class="empty-notes">
+            <dotlottie-player
+                src="https://lottie.host/e88fb279-9428-4eea-a957-14b4806e15f7/1EBVpCgVsj.lottie"
+                background="transparent"
+                speed="1"
+                style="width: 300px; height: 300px"
+                loop
+                autoplay
+            ></dotlottie-player>
+            <p>Tidak ada catatan</p>
+        </div>
+    </template>
+
+    <template id="note-form-drawer">
+        <div class="form-drawer">
+            <form action="" method="post" name="note-form">
+                <h6 class="form-title">Tambah Catatan</h6>
+
+                <div class="form-wrapper">
+                    <div class="form-group">
+                        <input type="text" name="title" placeholder="Judul">
+                    </div>
+                    <div class="form-group">
+                        <textarea name="body" placeholder="Catatan..." rows="8"></textarea>
+                    </div>
+                </div>
+
+                <button type="submit">Simpan</button>
+            </form>
+        </div>
+    </template>
+
+    <script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
+    <script src="assets/js/data/notes.js"></script>
+    <script src="assets/js/nav-menu.js"></script>
+    <script src="assets/js/search-bar.js"></script>
+    <script src="assets/js/note-item.js"></script>
+    <script src="assets/js/note-list.js"></script>
+    <script src="assets/js/note-form.js"></script>
+    <script src="assets/js/app.js"></script>
+</body>
+</html>

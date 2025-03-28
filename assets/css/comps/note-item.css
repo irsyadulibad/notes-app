@@ -1,0 +1,47 @@
+@import url('https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.31.0/dist/tabler-icons.min.css');
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+:host {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 10px;
+    font-family: 'Inter', sans-serif;
+}
+
+.note-title {
+    color: #262626;
+    font-weight: 600;
+    padding: 20px 15px 5px;
+}
+
+.note-body {
+    color: #404040;
+    padding: 5px 15px;
+}
+
+.note-actions {
+    padding: 10px 15px 15px;
+    display: flex;
+    justify-content: end;
+    gap: 7.5px;
+
+    button {
+        border: .5px solid #ccc;
+        border-radius: 10px;
+        padding: 5px 7px;
+        background: none;
+        cursor: pointer;
+        font-size: 16px;
+
+        &:hover {
+            background-color: #f3f4f6;
+        }
+    }
+}
