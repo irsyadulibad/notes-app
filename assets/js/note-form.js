@@ -13,6 +13,12 @@ class NoteFormElement extends HTMLElement {
         this.render();
     }
 
+    _save(note) {
+        const notes = JSON.parse(localStorage.getItem('notes'));
+        notes.push(note);
+        localStorage.setItem('notes', JSON.stringify(notes));
+    }
+
     show() {
         document.body.style.overflow = 'hidden';
 
@@ -47,9 +53,31 @@ class NoteFormElement extends HTMLElement {
     }
 
     attachListeners() {
+        const form = this.querySelector('form');
+
         this._overlay.addEventListener('click', e => {
             if(e.target.closest('.form-drawer')) return;
             this.hide();
+        });
+
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+
+            const formData = new FormData(e.target);
+            const note = {
+                id: 'notes-' + crypto.randomUUID(),
+                title: formData.get('title'),
+                body: formData.get('body'),
+                archived: false,
+                createdAt: new Date().toISOString(),
+            };
+
+
+            this._save(note);
+            this.hide();
+
+            form.reset();
+            document.querySelector('note-list').setAttribute('timestamp', Date.now());
         });
     }
 }

@@ -41,9 +41,8 @@ header {
 main {
     max-width: 90em;
     margin: 2em auto;
-    min-height: 50em;
+    min-height: 85vh;
     position: relative;
-    max-height: 100em;
 
     section:first-child {
         display: flex;
