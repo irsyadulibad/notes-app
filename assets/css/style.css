@@ -18,6 +18,7 @@ header {
     align-items: center;
     max-width: 90em;
     margin: 2em auto;
+    padding: 0 10px;
 
     .search-bar {
         width: 100%;
@@ -34,6 +35,7 @@ header {
             width: 40em;
             outline: none;
             font-size: 14px;
+            box-sizing: border-box;
         }
     }
 }
@@ -43,6 +45,7 @@ main {
     margin: 2em auto;
     min-height: 85vh;
     position: relative;
+    padding: 0 10px;
 
     section:first-child {
         display: flex;
@@ -88,18 +91,23 @@ main {
 
     .note-list {
         display: grid;
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(4, minmax(0, 1fr));
         gap: 20px;
+        width: 100%;
 
         .empty-notes {
-            width: 30em;
-            transform: translateX(50%);
+            grid-column: span 4 / span 4;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             height: 60vh;
             color: #9ca3af;
+
+            dotlottie-player {
+                width: 300px;
+                height: 300px;
+            }
 
             p {
                 margin-top: -2em;
@@ -110,8 +118,8 @@ main {
     }
 
     #add-section {
-        position: absolute;
-        bottom: 0;
+        position: fixed;
+        bottom: 10px;
         width: 100%;
         display: flex;
         justify-content: center;
@@ -171,9 +179,10 @@ main {
     .form-drawer {
         position: fixed;
         bottom: 0;
-        width: 100%;
+        left: 0;
+        right: 0;
         background-color: white;
-        padding: 40px 0;
+        padding: 40px 10px;
         border-radius: var(--radius) var(--radius) 0 0;
         transform: translateY(100%);
         animation: slide-up .3s;
@@ -186,11 +195,14 @@ main {
             border: none;
             outline: none;
             resize: none;
+            box-sizing: border-box;
         }
 
         form {
             margin: auto;
-            width: 30em;
+            width: 100%;
+            box-sizing: border-box;
+            max-width: 30em;
             align-items: center;
 
             .form-title {
@@ -241,6 +253,119 @@ main {
                 cursor: pointer;
                 margin: auto;
             }
+        }
+    }
+}
+
+/* Semi Desktop */
+@media screen and (max-width: 80rem) {
+    header {
+        margin: 1em auto;
+        padding: 10px;
+    }
+
+    main {
+        padding: 10px;
+        .note-list {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+}
+
+/* Tablet */
+@media screen and (max-width: 64rem) {
+    header {
+        flex-direction: column;
+        gap: 10px;
+        margin: 1em auto;
+
+        .search-bar {
+            input {
+                width: 15em;
+            }
+        }
+    }
+
+    main {
+        padding: 10px;
+        margin: 1em auto;
+
+        section:first-child {
+            flex-direction: column;
+        }
+
+        nav-menu {
+            width: 100%;
+        }
+
+        nav {
+            width: 100%;
+
+            ul {
+                display: grid;
+                grid-template-columns: auto auto;
+                width: 100%;
+
+                li {
+                    a {
+                        width: 100%;
+                        box-sizing: border-box;
+                    }
+                }
+            }
+        }
+
+        .note-list {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+}
+
+/* Mobile */
+@media screen and (max-width: 40rem) {
+    header {
+        flex-direction: column;
+        gap: 10px;
+        margin: 1em auto;
+
+        .search-bar {
+            input {
+                width: 15em;
+            }
+        }
+    }
+
+    main {
+        padding: 10px;
+        margin: 1em auto;
+
+        section:first-child {
+            flex-direction: column;
+        }
+
+        nav-menu {
+            width: 100%;
+        }
+
+        nav {
+            width: 100%;
+
+            ul {
+                display: grid;
+                grid-template-columns: auto auto;
+                width: 100%;
+
+                li {
+                    a {
+                        width: 100%;
+                        box-sizing: border-box;
+                    }
+                }
+            }
+        }
+
+        .note-list {
+            grid-template-columns: repeat(1, 1fr);
         }
     }
 }

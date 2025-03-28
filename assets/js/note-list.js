@@ -44,6 +44,10 @@ class NoteListElement extends HTMLElement {
         if(notes.length == 0) {
             const emptyNotes = document.querySelector('template#empty-notes').content.cloneNode(true);
 
+            if(this._showArchived) {
+                emptyNotes.querySelector('p').textContent = 'Tidak ada catatan yang diarsipkan';
+            }
+
             this.appendChild(emptyNotes);
         }
 
